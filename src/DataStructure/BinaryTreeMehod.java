@@ -387,6 +387,13 @@ public class BinaryTreeMehod {
         return null;
     }
 
+    /**
+    * @Description: 求两个节点之间的路径
+    * @param: [root, value1, value2]
+    * @return: java.util.List<java.lang.Integer>
+    * @Author: heyyw
+    * @Date: 2019/01/05 15:22
+    */
     public List<Integer> pathFromNode(BinaryTree root, int value1, int value2) {
         Stack<BinaryTree> stack1 = pathOfNode(root, value1);
         Stack<BinaryTree> stack2 = pathOfNode(root, value2);
@@ -425,6 +432,80 @@ public class BinaryTreeMehod {
         return result;
     }
 
+    /**
+    * @Description: 翻转二叉树
+    * @param: [root]
+    * @return: DataStructure.BinaryTree
+    * @Author: heyyw
+    * @Date: 2019/01/05 15:26
+    */
+    public BinaryTree invertBinaryTree(BinaryTree root) {
+        if (root == null)
+            return null;
+        if (root.leftNode == null && root.rightNode == null)
+            return root;
+        invertBinaryTree(root.leftNode);
+        invertBinaryTree(root.rightNode);
+        BinaryTree temp = root.leftNode;
+        root.leftNode = root.rightNode;
+        root.rightNode = temp;
+        return root;
+    }
 
+    /**
+    * @Description: 是否为完全二叉树
+    * @param: [root]
+    * @return: boolean
+    * @Author: heyyw
+    * @Date: 2019/01/05 15:48
+    */
+    public boolean isCompeleteTree(BinaryTree root) {
+        if (root == null)
+            return false;
+        if (root.leftNode == null && root.rightNode == null)
+            return true;
+        if (root.leftNode == null && root.rightNode != null)
+            return false;
+        Queue<BinaryTree> queue = new LinkedList<>();
+        queue.add(root);
+        boolean flag = false;
+        while (!queue.isEmpty()) {
+            BinaryTree bt = queue.poll();
+            if (bt.leftNode == null && bt.rightNode != null)
+                return false;
+            if (flag && (bt.leftNode != null || bt.rightNode != null))
+                return false;
+            if (bt.rightNode == null)
+                flag = true;
+            if (bt.leftNode != null)
+                queue.offer(bt.leftNode);
+            if (bt.rightNode != null)
+                queue.offer(bt.rightNode);
+        }
+        return flag;
+    }
+
+
+    /** 
+    * @Description: 是否为满二叉树
+    * @param: [root]
+    * @return: boolean        
+    * @Author: heyyw 
+    * @Date: 2019/01/05 16:18 
+    */ 
+    public boolean isFullTree(BinaryTree root) {
+        return false;
+    }
+    
+    /** 
+    * @Description: 是否为平衡二叉树
+    * @param: [root]
+    * @return: boolean        
+    * @Author: heyyw 
+    * @Date: 2019/01/05 16:19 
+    */ 
+    public boolean isAVLTree(BinaryTree root) {
+        return false;
+    }
 
 }
