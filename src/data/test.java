@@ -45,31 +45,3 @@ public class test {
     }
 }
 
-class Solution {
-    public double Power(double base, int exponent) {
-        int n = 0;
-        if (exponent < 0)
-            n = 0 - exponent;
-        else if (exponent == 0)
-            return 1;
-        else
-            n = exponent;
-        double res = PowerDivide(base, exponent);
-        if (exponent < 0)
-            return 1 / res;
-        else
-            return res;
-    }
-    public double PowerDivide(double base, int n) {
-        if (n == 1)
-            return base;
-        double temp = 0;
-        if (n % 2 == 0) {
-            temp = PowerDivide(base, n / 2);
-            return temp * temp;
-        } else {
-            temp = PowerDivide(base, (n + 1) / 2);
-            return temp * temp / base;
-        }
-    }
-}
